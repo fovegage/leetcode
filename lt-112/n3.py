@@ -15,12 +15,18 @@ class Solution:
     def build_node(self):
         current_data = self.node_data[self.index]
         self.index += 1
+        # if current_data != None:
+        #     node = TreeNode(current_data)
+        #     left = self.build_node()
+        #     node.left = left
+        #     right = self.build_node()
+        #     node.right = right
+        #     return node
+
         if current_data != None:
             node = TreeNode(current_data)
-            left = self.build_node()
-            node.left = left
-            right = self.build_node()
-            node.right = right
+            node.left = self.build_node()
+            node.right = self.build_node()
             return node
 
     def FindPath(self, root, expectNumber):
@@ -39,6 +45,21 @@ class Solution:
         self.onePath.pop()
         return self.PathArray
 
+    def loop(self, tree: TreeNode, num):
+        if tree is None:
+            return self.PathArray
+        node_val = tree.val
+        self.onePath.append(node_val)
+        num -= node_val
+        if num == 0:
+            self.PathArray.append(self.onePath[:])
+        else:
+            self.loop(tree.left, num)
+            self.loop(tree.right, num)
+
+        self.onePath.pop()
+        return self.PathArray
+
 
 if __name__ == '__main__':
     # 输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径
@@ -52,5 +73,6 @@ if __name__ == '__main__':
 
     so = Solution()
     node = so.build_node()
-    so.FindPath(node, 22)
+    # so.FindPath(node, 22)
+    so.loop(node, 22)
     print(so.PathArray)
