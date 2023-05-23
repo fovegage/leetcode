@@ -1,8 +1,8 @@
+### 面试记录
+
 ```
 # dnsmasq   nameserver
 https://blog.csdn.net/qq_21127151/article/details/121203249
-
-# 使用之前的志祥画图工具
 
 # redis
 字符串 set name "gage"
